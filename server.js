@@ -54,9 +54,9 @@ categories(app)
 types(app)
 transactions(app)
 
-// server.listen(3000, '192.168.10.14' || 'localhost', function(){
-//     console.log(`Aplicación ${process.pid} iniciada en puerto ${port}`);
-// });
+server.listen(3000, '192.168.10.14' || 'localhost', function(){
+    console.log(`Aplicación ${process.pid} iniciada en puerto ${port}`);
+});
 
 app.get('/',(req,res) => {
     res.send('Ruta Raiz del backend')
