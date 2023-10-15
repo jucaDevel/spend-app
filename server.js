@@ -59,7 +59,7 @@ server.listen(3000, function(){
 });
 
 app.get('/',(req,res) => {
-    res.send('Ruta Raiz del backend')
+    res.send('Ruta Raiz del backend de la App Spend')
 });
 
 //ERROR HANDLER
