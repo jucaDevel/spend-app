@@ -54,7 +54,7 @@ categories(app)
 types(app)
 transactions(app)
 
-server.listen(3000, '192.168.10.14' || 'localhost', function(){
+server.listen(3000, function(){
     console.log(`Aplicación ${process.pid} iniciada en puerto ${port}`);
 });
 
