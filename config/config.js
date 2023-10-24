@@ -12,11 +12,11 @@ types.setTypeParser(1114,function(stringValue){
 });
 
 const databaseConfig = {
-    'host': '127.0.0.1',
+    'host': 'postgres://spenddb_user:1lSlbQpJ0DEWAZlktsIORMgbsPmxBxtK@dpg-ckm2l30710pc73f2dkag-a/spenddb',
     'port': 5432,
-    'database' : 'db_cost_tracking_app',
-    'user' : 'postgres',
-    'password' : 'sscanizales'
+    'database' : 'spenddb',
+    'user' : 'spenddb_user',
+    'password' : '1lSlbQpJ0DEWAZlktsIORMgbsPmxBxtK'
 };
 
 const db = pgp(databaseConfig)
