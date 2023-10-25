@@ -51,7 +51,7 @@ module.exports = {
                 if(User.isPasswordMatched(password,userBD.password)){
                     const token = jwt.sign({id: userBD.id,email: userBD.email},keys.secretOrKey,{
                         //expiresIn: (60*60*24) // 1 hora;
-                        expiresIn: (60*5) //2 MINUTOS
+                        //expiresIn: (60*5) //2 MINUTOS
                     }); //Linea de codigo para controlar el tiempo de sesión del Usuario en la app
     
                     const data = {
