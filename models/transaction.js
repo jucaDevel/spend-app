@@ -72,7 +72,9 @@ Transaction.getTransactionByType = (idUser,idType) =>{
             t.price,
             t.id_category,
             t.id_type,
-            TO_CHAR(t.created_at,'DD-MM-YYYY') created_at
+            TO_CHAR(t.created_at,'DD-MM-YYYY') created_at,
+            t.id,
+            t.id_user
         FROM transaction t
         INNER JOIN category c on c.id = t.id_category
         INNER JOIN type ty on ty.id = t.id_type
@@ -89,6 +91,86 @@ Transaction.getTransactionByType = (idUser,idType) =>{
         idUser,
         idType
     ])
+}
+
+Transaction.getTransactionById = (idUser,idTrans) =>{
+    const sql = `
+        SELECT 
+            t.name,
+            t.price,
+            t.id_category,
+            t.id_type,
+            TO_CHAR(t.created_at,'DD-MM-YYYY') created_at,
+            t.id,
+            t.id_user
+        FROM transaction t
+        INNER JOIN category c on c.id = t.id_category
+        INNER JOIN type ty on ty.id = t.id_type
+        WHERE 
+            EXTRACT(MONTH FROM t.created_at) = EXTRACT(MONTH FROM CURRENT_DATE)
+        AND
+            t.id_user = $1
+        AND
+            t.id = $2
+        ;
+    `;
+
+    return db.manyOrNone(sql,[
+        idUser,
+        idTrans
+    ])
+}
+
+Transaction.getTransactionByCategory = (idUser,idType,idCat) =>{
+    const sql = `
+        SELECT 
+            t.name,
+            t.price,
+            t.id_category,
+            t.id_type,
+            TO_CHAR(t.created_at,'DD-MM-YYYY') created_at,
+            t.id,
+            t.id_user
+        FROM transaction t
+        INNER JOIN category c on c.id = t.id_category
+        INNER JOIN type ty on ty.id = t.id_type
+        WHERE 
+            EXTRACT(MONTH FROM t.created_at) = EXTRACT(MONTH FROM CURRENT_DATE)
+        AND
+            t.id_user = $1
+        AND
+            t.id_type = $2
+        AND
+            t.id_category = $3
+        ;
+    `;
+
+    return db.manyOrNone(sql,[
+        idUser,
+        idType,
+        idCat
+    ])
+}
+
+Transaction.update = (transaction) =>{
+    const sql = `
+        UPDATE 
+            transaction
+        SET
+            name = $2,
+            price = $3,
+            id_category = $4
+        WHERE
+            id = $1
+        
+    `;
+
+    return db.none(sql,[
+        transaction.id,
+        transaction.name,
+        transaction.price,
+        transaction.id_category,
+    ]);
 }
 
 module.exports = Transaction; //Exportar el objeto User para usar las funciones en demas archivos
